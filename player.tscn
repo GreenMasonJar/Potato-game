@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://fb11bd45kx0x"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8wunm"]
+[ext_resource type="Texture2D" uid="uid://dl8dqq1vdpn48" path="res://Potato Art/Potato Standing_0001.png" id="2_ksj50"]
+[ext_resource type="Texture2D" uid="uid://bw8yd4b2k031g" path="res://Potato Art/Potato Standing_0002.png" id="3_8knir"]
+[ext_resource type="Texture2D" uid="uid://ctscpf20f1sh2" path="res://Potato Art/Potato Standing_0003.png" id="4_6c3gg"]
+[ext_resource type="Texture2D" uid="uid://d4iwt4s0dvhk0" path="res://Potato Art/Potato Standing_0004.png" id="5_3jyuy"]
+[ext_resource type="Texture2D" uid="uid://b8xk44yr63shj" path="res://Potato Art/Potato Standing_0005.png" id="6_onuj6"]
+[ext_resource type="Texture2D" uid="uid://vrr8hy3n22uf" path="res://Potato Art/Potato Standing_0006.png" id="7_2hi6j"]
+[ext_resource type="Texture2D" uid="uid://citm8tgo1yxbh" path="res://Potato Art/Potato Standing_0007.png" id="8_hcsfy"]
+[ext_resource type="Texture2D" uid="uid://d145r377hfmhk" path="res://Potato Art/Potato Walking_0001.png" id="9_il1ob"]
+[ext_resource type="Texture2D" uid="uid://d0rx34yfxtb6n" path="res://Potato Art/Potato Jumping_0001.png" id="9_k33bv"]
+[ext_resource type="Texture2D" uid="uid://c7qucuatn3jpr" path="res://Potato Art/Potato Walking_0002.png" id="10_3awdo"]
+[ext_resource type="Texture2D" uid="uid://dk1ocsmpqlcqg" path="res://Potato Art/Potato Jumping_0002.png" id="10_s1uxl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31k2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ksj50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8knir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6c3gg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3jyuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_onuj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2hi6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hcsfy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_k33bv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s1uxl")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_il1ob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3awdo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn6pe"]
+radius = 13.0
+height = 36.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_8wunm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(87, 73)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_31k2s")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.955566
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(85, 71)
+shape = SubResource("CapsuleShape2D_rn6pe")

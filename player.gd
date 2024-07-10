@@ -1,42 +1,49 @@
-extends CharacterBody2D
+extends Area2D
+
+@export var speed = 300
 
 
-@export var SPEED = 300.0
-const JUMP_VELOCITY = -400.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
 
 
-func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * SPEED
-		
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	var velocity = Vector2.ZERO
 	
-	if !is_on_floor():
-		$AnimatedSprite2D.animation = "jump"
+	if Input.is_action_pressed("move_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("move_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("move_up"):
+		velocity.y -= 1
+	if Input.is_action_pressed("move_down"):
+		velocity.y += 1
+	
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * speed
+		$AnimatedSprite2D.play()
+	
+		
+	position += velocity * delta
+	
+	
+	
+	if velocity.x != 0:
+		$AnimatedSprite2D.animation = "walk_side"
+		$AnimatedSprite2D.flip_v = false
 		$AnimatedSprite2D.flip_h = velocity.x < 0
-	elif velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk"
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	else:
+	elif velocity.y < 0:
+		$AnimatedSprite2D.animation = "walk_up"
+	elif velocity.y > 0:
+		$AnimatedSprite2D.animation = "walk_down"
+	if velocity.x == 0 and velocity.y == 0:
 		$AnimatedSprite2D.animation = "idle"
 		
+	
 		
 	
-	
-
-	move_and_slide()
+			
+		

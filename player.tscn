@@ -82,19 +82,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_csq2x"]
-radius = 16.0
-height = 50.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_trsga"]
+radius = 4.0
+height = 8.0
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_7tttt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_4gkn2")
 animation = &"idle"
-frame_progress = 0.0144464
+frame_progress = 0.905822
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -2)
-shape = SubResource("CapsuleShape2D_csq2x")
+position = Vector2(0, 2)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_trsga")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true

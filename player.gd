@@ -1,8 +1,8 @@
-extends Area2D
+extends CharacterBody2D
 
-@export var speed = 300
+@export var speed = 100
 
-
+signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +12,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = Vector2.ZERO
-	
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -25,11 +24,10 @@ func _process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
+	else: 
+		$AnimatedSprite2D.animation = "idle"
 	
-		
 	position += velocity * delta
-	
-	
 	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk_side"
@@ -39,11 +37,9 @@ func _process(delta):
 		$AnimatedSprite2D.animation = "walk_up"
 	elif velocity.y > 0:
 		$AnimatedSprite2D.animation = "walk_down"
-	if velocity.x == 0 and velocity.y == 0:
-		$AnimatedSprite2D.animation = "idle"
+	#elif velocity.x == 0 and velocity.y == 0:
+		#$AnimatedSprite2D.animation = "idle"
 		
+func _physics_process(delta):
+	move_and_collide(velocity*delta)
 	
-		
-	
-			
-		

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://oelpjk0dm2l0"]
+
+[ext_resource type="Texture2D" uid="uid://dg5ndkx47oebm" path="res://Potato Art/Pickle Idle_0002.png" id="1_sivtw"]
+[ext_resource type="Texture2D" uid="uid://baaa4osbvb0mm" path="res://Potato Art/Pickle Idle_0001.png" id="2_qt0vi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hy53r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sivtw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qt0vi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qt0vi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qt0vi")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qgggi"]
+radius = 13.0
+
+[node name="Pickle" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hy53r")
+animation = &"idle"
+frame = 1
+frame_progress = 0.812219
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 9)
+shape = SubResource("CircleShape2D_qgggi")

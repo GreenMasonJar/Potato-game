@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://oelpjk0dm2l0"]
+[gd_scene load_steps=8 format=3 uid="uid://oelpjk0dm2l0"]
 
+[ext_resource type="Script" path="res://pickle.gd" id="1_jbrwk"]
 [ext_resource type="Texture2D" uid="uid://dg5ndkx47oebm" path="res://Potato Art/Pickle Idle_0002.png" id="1_sivtw"]
 [ext_resource type="Texture2D" uid="uid://baaa4osbvb0mm" path="res://Potato Art/Pickle Idle_0001.png" id="2_qt0vi"]
+[ext_resource type="Texture2D" uid="uid://b3d4f4acej21" path="res://Potato Art/Pickle Walk_0001.png" id="3_5xrfd"]
+[ext_resource type="Texture2D" uid="uid://c7oc41b6x8boq" path="res://Potato Art/Pickle Walk_0002.png" id="4_6ax6b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hy53r"]
 animations = [{
@@ -21,19 +24,39 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5xrfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5xrfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5xrfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6ax6b")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qgggi"]
-radius = 13.0
+radius = 4.0
 
 [node name="Pickle" type="CharacterBody2D"]
+script = ExtResource("1_jbrwk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_hy53r")
-animation = &"idle"
-frame = 1
-frame_progress = 0.812219
+animation = &"walk_side"
+frame = 3
+frame_progress = 0.3749
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 9)
+position = Vector2(2, 3)
 shape = SubResource("CircleShape2D_qgggi")
